@@ -1,0 +1,10 @@
+--cpu Cortex-M0+
+".\main.o"
+".\motor.o"
+".\movement.o"
+".\sensor.o"
+".\startup_mkl25z4.o"
+".\system_mkl25z4.o"
+--entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\wasser-scorpii.map" -o .\wasser-scorpii.axf
