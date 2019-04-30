@@ -1,5 +1,5 @@
 #include "MKL25Z4.h"
-
+#include "motor.h"
 /**
 
 Motor notes:
@@ -15,16 +15,8 @@ Motor notes:
 const int RAW_STEPS = 200;
 const int STEP_RESOLUTION = 16 * RAW_STEPS; // Driver is in 1/16 mode
 
-
-typedef struct Motor {
-	int id;
-  int step_pin;
-  int dir_pin;
-	float pos;
-	void *uart_port;
-} Motor;
 /**
-  Over UART:
+    Over UART:
     Set microstep
     Set mode
 

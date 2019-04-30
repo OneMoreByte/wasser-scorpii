@@ -3,11 +3,19 @@
 
 struct Motor;
 
+typedef struct Motor {
+	int id;
+  int step_pin;
+  int dir_pin;
+	float pos;
+	void *uart_port;
+} Motor;
+
 // Control
-extern void init(struct Motor *m);
-extern void step_to_pos(int pos, struct Motor *m);
+extern void init(Motor *m);
+extern void step_to_pos(int pos, Motor *m);
 
 // UART
-int read_trans_count(struct Motor *m);
+int read_trans_count(Motor *m);
 
 #endif
