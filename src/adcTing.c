@@ -100,6 +100,7 @@ int main (void) {
 		avg_voltage = sum/NUM_SAMPLES_TO_AVG;
 		
 		// light RGB LED according to range
+		//Modify to this line to send a signal to the main.c process
 		Display_Range(avg_voltage);
 		
 	}
