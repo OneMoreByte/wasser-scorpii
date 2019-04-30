@@ -1,13 +1,13 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-extern struct Motor;
+struct Motor;
 
 // Control
-extern void init(struct motor *m);
-extern void step_to_pos(int pos, struct motor *m);
+extern void init(struct Motor *m);
+extern void step_to_pos(int pos, struct Motor *m);
 
 // UART
-int read_trans_count(struct motor *m);
+int read_trans_count(struct Motor *m);
 
 #endif

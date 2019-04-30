@@ -13,16 +13,16 @@ Motor notes:
 **/
 
 const int RAW_STEPS = 200;
-extern const int STEP_RESOLUTION = 16 * RAW_STEPS; // Driver is in 1/16 mode
+const int STEP_RESOLUTION = 16 * RAW_STEPS; // Driver is in 1/16 mode
 
 
-struct Motor {
+typedef struct Motor {
 	int id;
   int step_pin;
   int dir_pin;
 	float pos;
 	void *uart_port;
-};
+} Motor;
 /**
   Over UART:
     Set microstep
@@ -38,7 +38,7 @@ void delay(unsigned int tem_delay) {
 	}
 }
 
-void init(struct Motor *m) {
+void init(Motor *m) {
 	// Init control pins
 	SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;
 	PORTC->PCR[m->step_pin] = 1U << m->step_pin; /* make step_pin GPIO */
@@ -54,7 +54,7 @@ void init(struct Motor *m) {
   Reads the # of successful commands over UART
   This function is used for confirming command receipt
  **/
-int read_trans_count(struct Motor *m) {
+int read_trans_count(Motor *m) {
 	// TODO (Nah, no UART)
 	return 0;
 }
@@ -62,17 +62,17 @@ int read_trans_count(struct Motor *m) {
 /**
   Steps Motor to a given position
 **/
-void step_to_pos(int pos, struct Motor *m) {
+void step_to_pos(int pos, Motor *m) {
 	int steps = pos - m->pos;
 
 	if (pos > STEP_RESOLUTION)
-		pos = pos - STEP_RESOLUTION
+		pos = pos - STEP_RESOLUTION;
 	if (pos < 0)
 		pos = pos + STEP_RESOLUTION;
 
 	steps = steps * 2; // duplicates step count for on/off toggle
 	for (; steps > 0; steps--) {
-		GPIOC_PTOR |= 1U << step_pin;
+		GPIOC_PTOR |= 1U << m->step_pin;
 		delay(1);
 	}
 
