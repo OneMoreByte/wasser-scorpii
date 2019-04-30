@@ -6,7 +6,7 @@
 
 //the Threshold parameters are used to sweep through valid IR Levels of the IR_LED
 //IR_LED
-int Threshold[NUM_RANGE_STEPS] = {33500, 28100, 25400, 25270, 20200, 0};
+int Threshold[NUM_RANGE_STEPS] = {0, 20200, 25270, 25400, 28100, 73500};
 
 const int Colors[NUM_RANGE_STEPS][3] = {{ 1, 0, 0}, // red
 																				{ 1, 0, 1}, // magenta
@@ -55,14 +55,14 @@ unsigned Measure_IR(void) {
 }
 
 
-void Display_Range(int b) {
+_Bool Display_Range(int b) {
 	unsigned i;
 	
 	for (i=0; i<NUM_RANGE_STEPS-1; i++) {
-		if (b > Threshold[i])
-			break;
+		if (b < Threshold[i]&&i>=1)
+			return 1;
 	}
-	Control_RGB_LEDs(Colors[i][RED], Colors[i][GREEN], Colors[i][BLUE]);
+	return 0;
 }
 
 void Delay_us(volatile unsigned int time_del) {
@@ -76,7 +76,7 @@ void Delay_us(volatile unsigned int time_del) {
   MAIN function
 //MODIFIED FROM IR LED CODE
  *----------------------------------------------------------------------------*/
-int main (void) {
+_Bool isTriggered(void) {
 	unsigned on_brightness=0, measured_voltage=0;
 	static int avg_voltage;
 	int sum;
@@ -101,7 +101,6 @@ int main (void) {
 		
 		// light RGB LED according to range
 		//Modify to this line to send a signal to the main.c process
-		Display_Range(avg_voltage);
-		
+		return Display_Range(avg_voltage);
 	}
 }
