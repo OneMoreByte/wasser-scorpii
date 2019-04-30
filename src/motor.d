@@ -1,1 +1,0 @@
-.\motor.o: motor.c

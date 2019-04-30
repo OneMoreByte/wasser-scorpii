@@ -1,7 +1,13 @@
-#pragma once
+#ifndef MOTOR_H
+#define MOTOR_H
 
-struct motor;
+extern struct Motor;
 
-void init(struct motor *m);
+// Control
+extern void init(struct motor *m);
+extern void step_to_pos(int pos, struct motor *m);
+
+// UART
 int read_trans_count(struct motor *m);
-void step_to_deg(float theta, struct motor *m);
+
+#endif

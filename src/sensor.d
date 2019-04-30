@@ -1,1 +1,0 @@
-.\sensor.o: sensor.c
