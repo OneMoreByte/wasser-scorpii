@@ -1,5 +1,4 @@
 #include "MKL25Z4.h"
-//#include "util.h"
 
 /**
 
@@ -31,6 +30,14 @@ struct Motor {
 
 **/
 
+void delay(unsigned int tem_delay) {
+	volatile int t;
+
+	while(tem_delay--) {
+		for(t=100; t>0; t--);
+	}
+}
+
 void init(struct Motor *m) {
 	// Init control pins
 	SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;
@@ -53,20 +60,21 @@ int read_trans_count(struct Motor *m) {
 }
 
 /**
-  Steps Motor to a given degree
+  Steps Motor to a given position
 **/
 void step_to_pos(int pos, struct Motor *m) {
 	int steps = pos - m->pos;
 
 	if (pos > STEP_RESOLUTION)
-		pos = pos - STEP_RESOLUTION;
+		pos = pos - STEP_RESOLUTION
 	if (pos < 0)
 		pos = pos + STEP_RESOLUTION;
 
-	m->pos = pos;
 	steps = steps * 2; // duplicates step count for on/off toggle
 	for (; steps > 0; steps--) {
 		GPIOC_PTOR |= 1U << step_pin;
-		delayMs(1);
+		delay(1);
 	}
+
+	m->pos = pos; // Update position
 }
