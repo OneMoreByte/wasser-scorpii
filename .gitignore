@@ -2,6 +2,6 @@ src/wasser-scorpii*
 src/*.o
 src/*.d
 src/*.lst
-src/Listings
-src/Objects
+src/Listings/*
+src/Objects/*
 src/RTE
