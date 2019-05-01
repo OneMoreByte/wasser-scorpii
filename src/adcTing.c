@@ -8,12 +8,6 @@
 //IR_LED
 int Threshold[NUM_RANGE_STEPS] = {0, 20200, 25270, 25400, 28100, 73500};
 
-const int Colors[NUM_RANGE_STEPS][3] = {{ 1, 0, 0}, // red
-																				{ 1, 0, 1}, // magenta
-																				{ 1, 1, 1}, // white
-																				{ 1, 1, 0}, // yellow
-																				{ 0, 1, 0}, // green
-																				{ 0, 0, 1}};// blue
 																	 
 
 void Init_ADC(void) {
