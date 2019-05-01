@@ -43,8 +43,8 @@ int main(void) {
 			if(!isTriggered()){
 				stopNfire();
 			}
+			base.pos = x * 16;
 		}
 		toggle_dir(&base);
 	}
-
 }
