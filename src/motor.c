@@ -33,9 +33,9 @@ void delay(unsigned int tem_delay) {
 void init(Motor *m) {
 	// Init control pins
 	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	PORTA->PCR[m->step_pin] = 1U << m->step_pin; /* make step_pin GPIO */
-  PORTA->PCR[m->dir_pin] = 1U << m->dir_pin;  /* make dir_pin GPIO */
-	PTA->PDDR |= 1U << m->step_pin;
+	PORTA->PCR[m->step_pin] = 0x100; /* make step_pin GPIO */
+  PORTA->PCR[m->dir_pin] = 0x100;  /* make dir_pin GPIO */
+	GPIOA_PDDR |= 1U << m->step_pin;
 
   //Init UART
 	
