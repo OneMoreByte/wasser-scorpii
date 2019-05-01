@@ -1,6 +1,7 @@
 #include <MKL25Z4.H>
 #include "motor.h"
 #include "adcTing.h"
+#include "user_defs.h"
 
 //Global variables
 int stepcount = 0;
@@ -13,8 +14,8 @@ const int Colors[NUM_RANGE_STEPS][3] = {{ 1, 0, 0}, // red
 
 
 void initAll(Motor *m){
-	Init_ADC();
-	Init_IR_LED();
+//	Init_ADC();
+//	Init_IR_LED();
 	m->step_pin = 4; // Use PORTA4
 	m->dir_pin = 5;  // Use PORTA5
 	m->id = 0;
@@ -22,12 +23,12 @@ void initAll(Motor *m){
 
 	init(m);
 
-	Init_RGB_LEDs();
+	//Init_RGB_LEDs();
 }
 
 void stopNfire(){
 	//pause the motor
-	Control_RGB_LEDs(1,0,0);
+	//Control_RGB_LEDs(1,0,0);
 	Delay_us(5000000);
 	//TODO
 	//send power to a port
@@ -44,14 +45,14 @@ int main(void) {
 	While loop turns motor in a circle whilst calling isTriggered();
 	*/
 	while(1){
-		Control_RGB_LEDs(0,0,1);
+		//Control_RGB_LEDs(0,0,1);
 		//*run motor*
 		for (int x = 0; x < 200; x++) {
-			step_to_pos(x, &base);
+			step_to_pos(x*16, &base);
 		//delay a bit then check with isTriggered()
-			if(!isTriggered()){
-				stopNfire();
-			}
+		//	if(!isTriggered()){
+		//		stopNfire();
+		//	}
 		}
 		toggle_dir(&base);
 	}
