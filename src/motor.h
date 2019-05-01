@@ -14,6 +14,7 @@ typedef struct Motor {
 // Control
 extern void init(Motor *m);
 extern void step_to_pos(int pos, Motor *m);
+extern void toggle_dir(Motor *M);
 
 // UART
 int read_trans_count(Motor *m);

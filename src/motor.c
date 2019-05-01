@@ -32,12 +32,13 @@ void delay(unsigned int tem_delay) {
 
 void init(Motor *m) {
 	// Init control pins
-	SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;
-	PORTC->PCR[m->step_pin] = 1U << m->step_pin; /* make step_pin GPIO */
-  PORTC->PCR[m->dir_pin] = 1U << m->dir_pin;  /* make dir_pin GPIO */
-	PTC->PDDR |= 1U << m->step_pin;
+	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
+	PORTA->PCR[m->step_pin] = 1U << m->step_pin; /* make step_pin GPIO */
+  PORTA->PCR[m->dir_pin] = 1U << m->dir_pin;  /* make dir_pin GPIO */
+	PTA->PDDR |= 1U << m->step_pin;
 
   //Init UART
+	
   //SIM_SCGC4 |= SIM_SCGC4_UART1_MASK;
 }
 
@@ -64,9 +65,13 @@ void step_to_pos(int pos, Motor *m) {
 
 	steps = steps * 2; // duplicates step count for on/off toggle
 	for (; steps > 0; steps--) {
-		GPIOC_PTOR |= 1U << m->step_pin;
+		GPIOA_PTOR |= 1U << m->step_pin;
 		delay(1);
 	}
 
 	m->pos = pos; // Update position
+}
+
+void toggle_dir(Motor *m) {
+	GPIOA_PTOR |= 1U << m->dir_pin;
 }
