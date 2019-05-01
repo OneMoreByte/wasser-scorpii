@@ -1,10 +1,13 @@
 #include <MKL25Z4.H>
+#include "motor.h"
+
 
 //Global variables
 int stepcount = 0;
 
 int main(void) {
 	int degree = stepcount%360;
+	Motor base;
 	
 	/*
 	While loop turns motor in a circle whilst calling isTriggered();
