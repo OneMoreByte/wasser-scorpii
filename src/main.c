@@ -7,9 +7,15 @@ int stepcount = 0;
 
 
 	
-void initAll(){
+void initAll(Motor *m){
 	Init_ADC();
 	Init_IR_LED();
+	m->step_pin = 4; // Use PORTA4
+	m->dir_pin = 5;  // Use PORTA5
+	m->id = 0;
+	m->pos = 0;
+	
+	init(m);
 }
 
 void stopNfire(){
@@ -21,16 +27,10 @@ void stopNfire(){
 }
 
 int main(void) {
-	initAll();
 	int degree = stepcount%360;
 	Motor base;
-	
-	base.step_pin = 4; // Use PORTA4
-	base.dir_pin = 5;  // Use PORTA5
-	base.id = 0;
-	base.pos = 0;
-	
-	init(&base);
+	initAll(&base);	
+
 	
 	/*
 	While loop turns motor in a circle whilst calling isTriggered();
