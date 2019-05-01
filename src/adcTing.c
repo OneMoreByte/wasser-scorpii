@@ -83,9 +83,6 @@ _Bool isTriggered(void) {
 	int sum;
 	unsigned n;
 	
-	Init_ADC();
-	Init_IR_LED();
-	
 	while (1) {
 		sum = 0;
 		for (n=0; n<NUM_SAMPLES_TO_AVG; n++) {

@@ -5,7 +5,15 @@
 //Global variables
 int stepcount = 0;
 
+
+	
+void initAll(){
+	Init_ADC();
+	Init_IR_LED();
+}
+
 int main(void) {
+	initAll();
 	int degree = stepcount%360;
 	Motor base;
 	
@@ -14,7 +22,8 @@ int main(void) {
 	*/
 	while(1){
 		//*run motor*
-		if(isTriggered()){
+		//delay a bit then check with isTriggered()
+		if(!isTriggered()){
 			stopNfire();
 		}
 	}
@@ -22,6 +31,9 @@ int main(void) {
 }
 
 void stopNfire(){
+	//pause the motor
+	
+	//TODO
 	//send power to a port
 	//LED for test case, massive pump for real product
 }
