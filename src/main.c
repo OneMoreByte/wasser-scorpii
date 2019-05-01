@@ -1,6 +1,6 @@
 #include <MKL25Z4.H>
 #include "motor.h"
-#include "adcTing.c"
+#include "adcTing.h"
 
 //Global variables
 int stepcount = 0;
@@ -35,16 +35,15 @@ int main(void) {
 	/*
 	While loop turns motor in a circle whilst calling isTriggered();
 	*/
-	while(1){
+	//while(1){
 		//*run motor*
 		for (int x = 0; x < 200; x++) {
-			step_to_pos(x*16, &base);
+			step_to_pos(x, &base);
 		//delay a bit then check with isTriggered()
 			if(!isTriggered()){
 				stopNfire();
 			}
-			base.pos = x * 16;
 		}
 		toggle_dir(&base);
-	}
+	//}
 }
