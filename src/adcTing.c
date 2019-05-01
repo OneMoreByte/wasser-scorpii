@@ -55,6 +55,7 @@ unsigned Measure_IR(void) {
 }
 
 
+//returns true or false based on what the voltage value is.
 _Bool Display_Range(int b) {
 	unsigned i;
 	
@@ -83,9 +84,7 @@ _Bool isTriggered(void) {
 	unsigned n;
 	
 	Init_ADC();
-	Init_RGB_LEDs();
 	Init_IR_LED();
-	Control_RGB_LEDs(0, 0, 0);
 	
 	while (1) {
 		sum = 0;
