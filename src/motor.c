@@ -73,5 +73,11 @@ void step_to_pos(int pos, Motor *m) {
 }
 
 void toggle_dir(Motor *m) {
-	GPIOA_PTOR |= 1U << m->dir_pin;
+	if (m->dir) {
+		m->dir = 0;
+		GPIOA_PSOR |= 1U << m->dir_pin;
+	} else {
+		m->dir = 1;
+		GPIOA_PCOR |= 1U << m->dir_pin;
+	}
 }
