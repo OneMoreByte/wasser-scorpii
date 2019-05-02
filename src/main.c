@@ -22,14 +22,17 @@ void initAll(Motor *m){
 	m->dir = 1;
 	
 	init(m);
-
+	PORTA->PCR[5] = 0x100;
+	GPIOA_PDDR |= 1U << 5;
 	//Init_RGB_LEDs();
 }
 
 void stopNfire(){
 	//pause the motor
 	//Control_RGB_LEDs(1,0,0);
-	Delay_us(2000000);
+	GPIOA_PSOR |= 1U << 5;
+	Delay_us(200000);
+	GPIOA_PCOR |= 1U << 5;
 	//TODO
 	//send power to a port
 	//LED for test case, massive pump for real product
