@@ -36,6 +36,7 @@ void init(Motor *m) {
 	PORTA->PCR[m->step_pin] = 0x100; /* make step_pin GPIO */
   PORTA->PCR[m->dir_pin] = 0x100;  /* make dir_pin GPIO */
 	GPIOA_PDDR |= 1U << m->step_pin;
+	GPIOA_PDDR |= 1U << m->dir_pin;
 
   //Init UART
 	
