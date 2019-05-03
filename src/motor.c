@@ -66,12 +66,12 @@ void step_to_pos(int pos, Motor *m) {
 	steps = steps * 2; // duplicates step count for on/off toggle
 	for (; steps > 0; steps--) {
 		GPIOA_PTOR |= 1U << m->step_pin;
-		delay(1);
+		delay(100);
 	}
 
 	m->pos = pos; // Update position
 }
 
 void toggle_dir(Motor *m) {
-	GPIOA_PTOR |= 1U << m->dir_pin;
+	GPIOA_PTOR = 1U << m->dir_pin;
 }
