@@ -49,7 +49,7 @@ int main(void) {
 		//Control_RGB_LEDs(0,0,1);
 		//*run motor*
 		for (int x = 0; x < 200; x++) {
-			step_to_pos(x*16, &base);
+			step_to_pos(x, &base);
 		//delay a bit then check with isTriggered()
 		//	if(!isTriggered()){
 		//		stopNfire();
