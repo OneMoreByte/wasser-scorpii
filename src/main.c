@@ -14,13 +14,12 @@ const int Colors[NUM_RANGE_STEPS][3] = {{ 1, 0, 0}, // red
 
 
 void initAll(Motor *m){
-//	Init_ADC();
-//	Init_IR_LED();
+	Init_ADC();
 	m->step_pin = 4; // Use PORTA4
 	m->dir_pin = 13;  // Use PORTA5
 	m->id = 0;
 	m->pos = 0;
-	m->dir = 0;
+	m->dir = 1;
 	
 	init(m);
 
@@ -30,7 +29,7 @@ void initAll(Motor *m){
 void stopNfire(){
 	//pause the motor
 	//Control_RGB_LEDs(1,0,0);
-	Delay_us(5000000);
+	Delay_us(2000000);
 	//TODO
 	//send power to a port
 	//LED for test case, massive pump for real product
@@ -38,6 +37,7 @@ void stopNfire(){
 
 int main(void) {
 	int degree = stepcount%360;
+	_Bool checkTrig = 0;
 	Motor base;
 	initAll(&base);
 
@@ -48,12 +48,14 @@ int main(void) {
 	while(1){
 		//Control_RGB_LEDs(0,0,1);
 		//*run motor*
-		for (int x = 0; x < 200; x++) {
-			step_to_pos(x, &base);
-		//delay a bit then check with isTriggered()
-		//	if(!isTriggered()){
-		//		stopNfire();
-		//	}
+		for (int x = 0; x < 202; x++) {
+			step_to_pos(x*16, &base);
+		  //delay a bit then check with isTriggered()
+			
+			checkTrig = isTriggered();
+			if(!checkTrig){
+				stopNfire();
+			}
 		}
 		toggle_dir(&base);
 	}

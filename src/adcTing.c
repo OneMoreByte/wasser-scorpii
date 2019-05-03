@@ -25,17 +25,6 @@ void Control_IR_LED(unsigned int led_on) {
 	}
 }
 
-//initilize IR_LED by using the PCR register; identify the pin number
-//on the PORTB to connect it to PORTB 
-void Init_IR_LED(void) {
-	PORTB->PCR[IR_LED_POS] &= ~PORT_PCR_MUX_MASK;          
-	PORTB->PCR[IR_LED_POS] |= PORT_PCR_MUX(1);          
-	PTB->PDDR |= MASK(IR_LED_POS);
-	
-	// start off with IR LED turned off
-	Control_IR_LED(0);
-}
-
 unsigned Measure_IR(void) {
 	volatile unsigned res=0;
 	
