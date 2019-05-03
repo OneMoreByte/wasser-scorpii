@@ -9,6 +9,7 @@ typedef struct Motor {
   int dir_pin;
 	float pos;
 	void *uart_port;
+	_Bool dir;
 } Motor;
 
 // Control
